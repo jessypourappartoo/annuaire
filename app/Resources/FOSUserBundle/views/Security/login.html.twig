@@ -1,0 +1,68 @@
+{% extends "FOSUserBundle::layout.html.twig" %}
+
+{% trans_default_domain 'FOSUserBundle' %}
+
+{% block fos_user_content %}
+
+<div class="container">
+	<div class="row">
+		<div class="page-header">
+			<h1>Se connecter <small>ou</small> s'inscrire</h1>
+		</div>
+	</div>
+</div>
+
+<div class="container">
+	<div class="row">
+		<div class="col-md-12">
+			{% if error %}
+			    <div class="alert alert-danger" role="alert">{{ error.messageKey|trans(error.messageData, 'security') }}</div>
+			{% endif %}
+		</div>
+	</div>
+	<div class="row">
+		<div class="col-md-12">
+			<div class="col-md-5">
+				<h3>Déjà inscrit ?</h3>
+				<div>
+					<p>Connectez-vous</p>
+				</div>
+			</div>
+		</div>
+	</div>
+	<div class="row">
+		<div class="col-md-12">
+			<div class="col-md-5">
+				<div class="well">
+					<form action="{{ path("fos_user_security_check") }}" method="post">
+					    <input class="form-control" placeholder="Name" type="hidden" name="_csrf_token" value="{{ csrf_token }}" />
+						<div class="form-group">
+						    <label for="Login">{{ 'security.login.username'|trans }}</label>
+					    	<input class="form-control" type="text" id="username" name="_username" value="{{ last_username }}" required="required" />
+						</div>
+					    <div class="form-group">
+					    <label for="Mot de passe">{{ 'security.login.password'|trans }}</label>
+					    <input class="form-control" type="password" id="password" name="_password" required="required" />
+						</div>
+					
+					    <input class="btn btn-primary" type="submit" id="_submit" name="_submit" value="{{ 'security.login.submit'|trans }}" />
+					</form>
+				</div>
+				
+			</div>
+			<div class="col-md-6 col-md-offset-1">
+				<h3>Pas encore inscrit ?</h3>
+				<div>
+					<p>Cliquer ici pour <strong>s'inscrire</strong></p>
+					<button class="btn btn-primary" onclick="javascript:window.open('{{path('fos_user_registration_register')}}','_self')">S'inscrire</button>
+				</div>
+			</div>
+		</div>
+	</div>
+	<div class="row">
+		<div class="col-md-6">
+	        <button class="btn btn-link" onclick="javascript:window.open('{{path('accueil')}}','_self')"><span class="glyphicon glyphicon-arrow-left"></span> Retour à l'accueil</button>
+		</div>
+	</div>
+</div>
+{% endblock fos_user_content %}

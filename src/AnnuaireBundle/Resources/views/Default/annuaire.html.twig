@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Test Annuaire Appartoo</title>
+	<meta charset="utf-8">
+    <link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+</head>
+<body>
+<div class="container">
+		<div class="row">
+			<div class="page-header">
+	  			<h1>Liste des contacts de l'annuaire</h1>
+			</div>
+		</div>
+		{% if post is defined %}
+			{{post}}
+		{% endif %}
+			
+		{% if post is defined and nom is defined and prenom is defined and post==true %}
+			<div class="alert alert-success">
+				Contact <strong>{{nom}} {{prenom}}</strong> ajouté/modifié avec succès
+			</div>
+		{% elseif post is defined and post=='champ_vide' %}
+			<div class="alert alert-warning">
+				Un ou plusieurs champ(s) manquant(s)
+			</div>
+		{% elseif post is defined and post=='suppression' %}
+			<div class="alert alert-danger">
+				Contact supprimé
+			</div>
+		{% endif %}
+	</div>
+
+	<div class="container">
+		<div class="row">
+			<table class="table table-striped">
+				<thead>
+      				<tr>
+        				<th>Nom</th>
+        				<th>Prenom</th>
+        				<th>Email</th>
+        				<th>Adresse</th>
+        				<th>Téléphone</th>
+        				<th>Site Web</th>
+      				</tr>
+    			</thead>
+    			<tbody>
+    				<form method="post" name="ajout">
+   						<input type="hidden" name="ajout" value="true">
+    				<tr>
+						<td><input size=15 class="form-control" type="text" name="nom"></td>
+						<td><input size=15 class="form-control" type="text" name="prenom"></td>
+						<td><input size=15 class="form-control" type="text" name="email"></td>
+						<td><input size=15 class="form-control" type="text" name="adresse"></td>
+						<td><input size=15 class="form-control" type="text" name="telephone"></td>
+						<td><input size=15 class="form-control" type="text" name="site"></td>
+						<td colspan="2"><button class="btn btn-primary" onclick="javascript:document.ajout.submit()"><span class="glyphicon glyphicon-plus"></span></button></td>
+					</tr>
+					</form>
+    				{% for i in liste %}
+    					<form name="infos" method="post">
+    						<input type="hidden" name="id" value="{{i['id']}}">
+						<tr>
+							<td><input size=15 class="form-control" type="text" name="nom" value="{{i['nom']}}"></td>
+							<td><input size=15 class="form-control" type="text" name="prenom" value="{{i['prenom']}}"></td>
+							<td><input size=15 class="form-control" type="text" name="email" value="{{i['email']}}"></td>
+							<td><input size=15 class="form-control" type="text" name="adresse" value="{{i['adresse']}}"></td>
+							<td><input size=15 class="form-control" type="text" name="telephone" value="{{i['telephone']}}"></td>
+							<td><input size=15 class="form-control" type="text" name="site" value="{{i['siteweb']}}"></td>
+							{% if i['id'] != id %}
+								<td><button class="btn btn-info" onclick="javascript:document.infos.submit()"><span class="glyphicon glyphicon-pencil"></span></button></td>
+								<td><a class="btn btn-danger" href="{{path('supprimer',{id:i['id']})}}"><span class="glyphicon glyphicon-trash"></span></a></td>
+							{% else %}
+								<td colspan="2"><button class="btn btn-info" onclick="javascript:document.infos.submit()"><span class="glyphicon glyphicon-pencil"></button></td>
+							{% endif %}
+						</tr>
+						</form>
+					{% endfor %}
+    			</tbody>
+			</table>
+		</div>
+		<div class="row">
+			<button class="btn btn-danger" onclick="javascript:window.open('{{path('fos_user_security_logout')}}','_self');">Se déconnecter</button>
+		</div>
+	</div>
+	<script type="text/javascript" src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+</body>
+</html>

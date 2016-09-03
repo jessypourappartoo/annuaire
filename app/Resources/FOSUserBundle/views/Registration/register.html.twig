@@ -1,0 +1,30 @@
+{% extends "FOSUserBundle::layout.html.twig" %}
+
+{% block fos_user_content %}
+
+<div class="container">
+	<div class="row">
+		<div class="page-header">
+			<h1>S'inscrire</h1>
+		</div>
+	</div>
+</div>
+
+<div class="container">
+	<div class="row">
+		<div class="col-md-12">
+			<div class="col-md-10 col-md-offset-1">
+				<h3>Remplir le formulaire pour <strong>s'inscrire</strong></h3>
+				<div class="well">
+					{% include "FOSUserBundle:Registration:register_content.html.twig" %}
+				</div>
+			</div>
+		</div>
+	</div>
+	<div class="row">
+		<div class="col-md-6 ">
+	        <button class="btn btn-link" onclick="javascript:window.open('{{path('accueil')}}','_self')"><span class="glyphicon glyphicon-arrow-left"></span> Retour à l'accueil</button>
+		</div>
+	</div>
+</div>
+{% endblock fos_user_content %}

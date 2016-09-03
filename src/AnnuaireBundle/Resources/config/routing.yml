@@ -1,0 +1,11 @@
+accueil:
+    path:     /
+    defaults: { _controller: AnnuaireBundle:Default:index }
+
+annuaire:
+    path:     /annuaire
+    defaults: { _controller: AnnuaireBundle:Default:annuaire }
+
+supprimer:
+    path:     /supprimer/{id}
+    defaults: { _controller: AnnuaireBundle:Default:supprimer }

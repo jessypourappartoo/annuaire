@@ -19,7 +19,6 @@ class DefaultController extends Controller
 
     		if(isset($_POST)&&sizeof($_POST)!=0){
     			if(!isset($_POST['ajout'])){
-		    		var_dump($_POST);
 			   		$em = $this->getDoctrine()->getManager();
 				    $user_to_update = $em->getRepository('AnnuaireBundle:Annuaire')->find($_POST['id']);
 				    $user_to_update->setNom($_POST['nom']);

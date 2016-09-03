@@ -12,10 +12,7 @@
 	  			<h1>Liste des contacts de l'annuaire</h1>
 			</div>
 		</div>
-		{% if post is defined %}
-			{{post}}
-		{% endif %}
-			
+
 		{% if post is defined and nom is defined and prenom is defined and post==true %}
 			<div class="alert alert-success">
 				Contact <strong>{{nom}} {{prenom}}</strong> ajouté/modifié avec succès
